@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html,body{
+      width: 100%;
+      height: 100%;
+    }
+    div{
+      height: 3rem;
+      font-size: .6rem;
+    }
+    tr {
+      font-size: 0.2rem;
+    }
+  </style>
+  <script>
+    (function (doc, win) {
+  var docEl = doc.documentElement,
+    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function () {
+      var clientWidth = docEl.clientWidth;
+      if (!clientWidth) return;
+      if(clientWidth>=640){
+        docEl.style.fontSize = '100px';
+      }else{
+        docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+      }
+    };
+  if (!doc.addEventListener) return;
+  win.addEventListener(resizeEvt, recalc, false);
+  doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+  </script>
+</head>
+
+<body>
+  <div>
+    你好啊
+  </div>
+  <table>
+        <tr onclick="checkbox({id:9})">
+         <td><input type="checkbox"  name="checkbox"></td>
+            <td>nihao</td>
+            <td>nihao</td>
+            <td>nihao</td>
+        </tr>
+  </table>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div>
+  <div>回顶部</div><button onclick="goTop()">回去</button>
+  <button onclick="Refresh()">本页刷新</button>
+  <button onclick="getUser('')">url</button>
+</body>
+
+</html>
+<script>
+  function goTop () { 
+    document.documentElement.scrollTop = 0
+   }
+// 封装一个get请求的方法
+function getUser(url) {
+    return new Promise(function(resolve, reject) {
+        var XHR = new XMLHttpRequest();
+        XHR.open('GET', url, true);
+        XHR.send();
+
+        XHR.onreadystatechange = function() {
+            if (XHR.readyState == 4) {
+                if (XHR.status == 200) {
+                    try {
+                        var response = JSON.parse(XHR.responseText);
+                        resolve(response);
+                    } catch (e) {
+                        reject(e);
+                    }
+                } else {
+                    reject(new Error(XHR.statusText));
+                }
+            }
+        }
+    })
+}
+  getUser('https://hq.tigerbrokers.com/fundamental/finance_calendar/getType/2017-02-26/2017-06-10').then(res => {
+    console.log(res);
+  })
+console.log('Hi!');
+  let personDataCheck = [{id:1,title:'dadas'},{id:5,title:'dadas'},{id:2,title:'fsfsd'},{id:6,title:'dadas'}]
+  function checkbox(item) {
+    var s = true;
+    personDataCheck.forEach((e,index) => {
+      if(e.id == item.id){
+        s=false
+        personDataCheck.splice(index,1)
+      } else {
+      }
+    })
+    if(s == true){
+      personDataCheck.push(item)
+      console.log(personDataCheck);
+    } else {
+
+      console.log(personDataCheck);
+    }
+  }
+  const number = '123456';
+  let ccc=[1,2]
+  for(let i in number) {
+    console.log(i);
+  }
+  let set = new Set(number)
+  set.add(5)
+  console.log(set,set.has(5),8888);
+  let map = new Map([['title','name'],['name','lisi']])
+  console.log(map.size);
+  let map1 = Array.from(set).map(item => item *2)
+  ccc.forEach((item,index,arr) => {arr[index] = item *2});
+  console.log(map1, ccc);
+  // console.log(Object.values(number));
+  // console.log(Reflect.ownKeys({number:123,name:'zhangsan'}));
+  let b ={c:2,b:3,a:1}
+  let a = {a:11}
+  console.log({a,...b});
+  function Refresh () { 
+    console.log(666)
+    //更改本页网址
+    window.location.href = 'https://www.taobao.com'
+    //打开新页面
+    window.open("https://wwww.baidu.com")
+   }
+  const object = [{name:'zhangsan',id:0},{name:'lisi',id:1},{name:'wangwu',id:2}]
+  const app = '6666'
+  console.log(Array.from(app));
+  //表格打印
+  console.table(object,['id','name'])
+  //⚠打印
+  console.warn(Math.trunc(-3.9))
+  let nums = [{name:{city:'北京'}},{name:'张三'}]
+
+  function recursive(obj) {
+    var output = '';
+    if (typeof obj === 'object') {
+        for (var key in obj) {
+            var item = obj[key];
+            if (typeof item === 'object') {
+                output += recursive(item);
+            } else {
+                output += key + ':' + item + '\n';
+            }
+        }
+    } else {
+        output += obj + '\n';
+    }
+    return output;
+  }
+  console.log(recursive(nums));
+</script>
